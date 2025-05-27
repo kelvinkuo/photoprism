@@ -1,0 +1,23 @@
+version: '3.7'
+
+services:
+  photoprism:
+    image: photoprism/photoprism:latest
+    container_name: photoprism
+    restart: always
+    environment:
+      - PHOTOPRISM_HTTP_PORT=2342
+      - PHOTOPRISM_ADMIN_PASSWORD=admin123 # 设置管理员密码
+    volumes:
+      - /Volumes/bigdisk/photoprism/storage:/photoprism/storage
+      - /Volumes/bigdisk/photoprism/import:/photoprism/import
+      - /Volumes/bigdisk/photoprism/photos:/photoprism/photos  # 你的照片存储路径
+    ports:
+      - 2342:2342
+    networks:
+      - photoprism_network
+
+networks:
+  photoprism_network:
+    driver: bridge
+
